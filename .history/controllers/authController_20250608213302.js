@@ -274,6 +274,7 @@ export const registerSupervisor=async (req,res) =>{
       password,
       assignedCenters
     });
+    console.log("created")
     res.status(201).json({
       _id: supervisor._id,
       name: supervisor.name,

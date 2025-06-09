@@ -48,8 +48,22 @@ const supervisorRegisterValidation = [
 router.post('/admin/login', adminLoginValidation, validateRequest, adminLogin);
 router.post('/admin/register', adminRegisterValidation, validateRequest, registerAdmin);
 router.post('/tutor/login', tutorLoginValidation, validateRequest, tutorLogin);
-router.post('/supervisor/login', supervisorLoginValidation,validateRequest, supervisorLogin)
-router.post('/supervisor/register',supervisorRegisterValidation,validateRequest, registerSupervisor)
+router.post('/supervisor/login',(req, res, next)=>{
+  console.log(req.body),  
+  console.log("endpoint hit"),
+  next()
+}, supervisorLoginValidation,validateRequest, supervisorLogin)
+router.post('/supervisor/register',(req, res, next)=>{
+  console.log(req.body),  
+  console.log("endpoint hit"),
+  next()
+},supervisorRegisterValidation,(req, res, next)=>{
+  console.log("validation complete"),
+  next()
+},validateRequest, (req, res, next)=>{
+  console.log("validation complete2"),
+  next()
+},registerSupervisor)
 
 // Fast password reset endpoint for debugging
 router.post('/force-reset-tutor-password', forceResetTutorPassword);

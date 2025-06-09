@@ -7,7 +7,6 @@ import connectDB from './config/db.js';
 import apiRoutes from './routes/api.js';
 import attendanceRoutes from './routes/attendanceRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
-import supervisorRoutes from './routes/supervisorRoutes.js';
 import hadiyaRoutes from './routes/hadiyaRoutes.js'; // Added
 
 

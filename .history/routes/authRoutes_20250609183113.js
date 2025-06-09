@@ -42,14 +42,24 @@ const supervisorRegisterValidation = [
   body('email').isEmail().withMessage('Please enter a valid email'),
   body('phone').matches(/^[0-9]{10}$/).withMessage('Please enter a valid 10-digit phone number'),
   body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
-  body('assignedCenters').isArray().withMessage('Assigned centers must be an array')
+  body('centers').isArray().withMessage('Assigned centers must be an array')
 ];
 
 router.post('/admin/login', adminLoginValidation, validateRequest, adminLogin);
 router.post('/admin/register', adminRegisterValidation, validateRequest, registerAdmin);
 router.post('/tutor/login', tutorLoginValidation, validateRequest, tutorLogin);
 router.post('/supervisor/login', supervisorLoginValidation,validateRequest, supervisorLogin)
-router.post('/supervisor/register',supervisorRegisterValidation,validateRequest, registerSupervisor)
+router.post('/supervisor/register',(req, res, next)=>{
+  console.log(req.body),  
+  console.log("endpoint hit"),
+  next()
+},supervisorRegisterValidation,(req, res, next)=>{
+  console.log("validation complete"),
+  next()
+},validateRequest, (req, res, next)=>{
+  console.log("validation complete2"),
+  next()
+},registerSupervisor)
 
 // Fast password reset endpoint for debugging
 router.post('/force-reset-tutor-password', forceResetTutorPassword);

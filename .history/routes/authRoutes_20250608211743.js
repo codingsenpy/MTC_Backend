@@ -10,7 +10,8 @@ import {
   registerSupervisor
 } from '../controllers/authController.js';
 
-const router = express.Router();
+const 
+router = express.Router();
 
 // Admin login validation
 const adminLoginValidation = [

@@ -208,6 +208,7 @@ export const supervisorLogin = async(req,res)=>{
       role: supervisor.role,
       token: generateToken(supervisor._id, 'supervisor')
     });
+    
   }
   catch (error) {
     console.error('DEBUG: Supervisor login error:', error);

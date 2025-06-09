@@ -267,6 +267,7 @@ export const registerSupervisor=async (req,res) =>{
     if (supervisorExists) {
       return res.status(400).json({ message: 'Supervisor already exists' });
     }
+    console.log()
     const supervisor = await Supervisor.create({
       name,
       email,
@@ -274,6 +275,7 @@ export const registerSupervisor=async (req,res) =>{
       password,
       assignedCenters
     });
+    console.log("created")
     res.status(201).json({
       _id: supervisor._id,
       name: supervisor.name,
