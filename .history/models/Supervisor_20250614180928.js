@@ -19,10 +19,6 @@ const supervisorSchema = new mongoose.Schema({
     select: false
   },
   role: {
-    type: String,
-    default: 'supervisor'
-  },
-  email: {
   assignedCenters: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Center'
@@ -31,7 +27,6 @@ const supervisorSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
-}
 });
 
 // Encrypt password before saving
