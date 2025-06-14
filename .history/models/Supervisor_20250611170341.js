@@ -6,6 +6,7 @@ const supervisorSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please add a name']
   },
+
   phone: {
     type: String,
     required: [true, 'Please add a phone number'],

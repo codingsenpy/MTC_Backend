@@ -20,7 +20,7 @@ export const auth = async (req, res, next) => {
       user = await Supervisor.findById(decoded.id).select('-password');
     }
 
-    if (!user) {
+    if (!user) {            
       return res.status(401).json({ message: 'Token is not valid' });
     }
 

@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import Admin from '../models/Admin.js';
 import Tutor from '../models/Tutor.js';
-import Supervisor from '../models/Supervisor.js';
 
 export const auth = async (req, res, next) => {
   try {

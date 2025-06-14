@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import Admin from '../models/Admin.js';
 import Tutor from '../models/Tutor.js';
-import Supervisor from '../models/Supervisor.js';
 
 export const auth = async (req, res, next) => {
   try {
@@ -16,8 +15,8 @@ export const auth = async (req, res, next) => {
       user = await Admin.findById(decoded.id).select('-password');
     } else if (decoded.role === 'tutor') {
       user = await Tutor.findById(decoded.id).select('-password');
-    }else if (decoded.role === 'supervisor') {
-      user = await Supervisor.findById(decoded.id).select('-password');
+    } else if (decoded.role === 'supervisor') {
+      user = await S.findById(decoded.id).select('-password'); // Assuming supervisors are also admins
     }
 
     if (!user) {
@@ -47,7 +46,6 @@ export const supervisorAndAdminOnly = (req, res, next) => {
   if (req.role !== 'supervisor'|| req.role !== 'admin') {
     return res.status(403).json({ message: 'Access denied. Supervisor or Admin only.' });
   }
-}
 
 export const tutorOnly = (req, res, next) => {
   if (req.role !== 'tutor') {

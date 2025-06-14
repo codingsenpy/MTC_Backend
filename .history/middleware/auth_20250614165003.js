@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import Admin from '../models/Admin.js';
 import Tutor from '../models/Tutor.js';
-import Supervisor from '../models/Supervisor.js';
 
 export const auth = async (req, res, next) => {
   try {
@@ -17,8 +16,6 @@ export const auth = async (req, res, next) => {
     } else if (decoded.role === 'tutor') {
       user = await Tutor.findById(decoded.id).select('-password');
     }else if (decoded.role === 'supervisor') {
-      user = await Supervisor.findById(decoded.id).select('-password');
-    }
 
     if (!user) {
       return res.status(401).json({ message: 'Token is not valid' });
