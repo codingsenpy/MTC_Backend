@@ -28,12 +28,12 @@ app.use(cors({
 app.use(express.json());
 app.use(morgan('dev'));
 
-// Mount API routes
+// Mount API 
 app.use('/api/attendance', attendanceRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/supervisor',supervisorRoutes);
 app.use('/api/hadiya', hadiyaRoutes); // Added
-app.use('/api/guest', guestRoutes);
+app.use('/api/guest', guestRoutes);routes
 app.use('/api', apiRoutes);
 
 // Error handler

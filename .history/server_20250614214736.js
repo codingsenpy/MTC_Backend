@@ -35,7 +35,6 @@ app.use('/api/supervisor',supervisorRoutes);
 app.use('/api/hadiya', hadiyaRoutes); // Added
 app.use('/api/guest', guestRoutes);
 app.use('/api', apiRoutes);
-
 // Error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);

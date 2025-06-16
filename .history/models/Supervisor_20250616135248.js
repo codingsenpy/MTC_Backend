@@ -27,6 +27,7 @@ const supervisorSchema = new mongoose.Schema({
     required: [true, 'Please add an email'],
     unique: true,
     lowercase: true,
+    trim: true
   },
   assignedCenters: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -37,7 +38,7 @@ const supervisorSchema = new mongoose.Schema({
     default: Date.now
   }
 }
-);
+});
 
 // Encrypt password before saving
 supervisorSchema.pre('save', async function(next) {
