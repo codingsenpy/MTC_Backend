@@ -16,16 +16,11 @@ export const auth = async (req, res, next) => {
       user = await Admin.findById(decoded.id).select('-password');
     } else if (decoded.role === 'tutor') {
       user = await Tutor.findById(decoded.id).select('-password');
-    } else if (decoded.role === 'guest') {
-      // For guest tokens we don’t need a DB lookup – store minimal stub.
-      user = { _id: decoded.id };
-      // Expose the associated tutor for downstream handlers (attendance etc.)
-      req.tutorId = decoded.tutorId;
     }else if (decoded.role === 'supervisor') {
       user = await Supervisor.findById(decoded.id).select('-password');
     }
 
-    if (!user) {
+    if (!user) {            
       return res.status(401).json({ message: 'Token is not valid' });
     }
 
@@ -57,13 +52,6 @@ export const supervisorAndAdminOnly = (req, res, next) => {
 export const tutorOnly = (req, res, next) => {
   if (req.role !== 'tutor') {
     return res.status(403).json({ message: 'Access denied. Tutor only.' });
-  }
-  next();
-};
-
-export const guestOnly = (req, res, next) => {
-  if (req.role !== 'guest') {
-    return res.status(403).json({ message: 'Access denied. Guest only.' });
   }
   next();
 };

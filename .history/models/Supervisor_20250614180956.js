@@ -31,7 +31,6 @@ const supervisorSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
-}
 });
 
 // Encrypt password before saving
