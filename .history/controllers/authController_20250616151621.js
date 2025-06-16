@@ -206,7 +206,7 @@ export const supervisorLogin = async(req,res)=>{
       name: supervisor.name,
       email: supervisor.email,
       role: supervisor.role,
-      assignedCenters: supervisor.assignedCenters,
+      assignedCenter
       token: generateToken(supervisor._id, 'supervisor')
     });
   }
