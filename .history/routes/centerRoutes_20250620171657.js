@@ -73,9 +73,20 @@ router.post('/check-location', protect, locationCheckValidation, validateRequest
 
 router.get('/:centerId/nearby-tutors', getNearbyTutors);
 
-router.post('/comment/:id',auth,supervisorOnly, getCenter,(req, res) => {
-  
-  res.status(501).json({ message: 'Comment feature not implemented yet' });
+router.post('/comment/:id',auth,supervisorOnly, (req, res) => {
+  try {
+    const center = await Center.findById(req.params.id)
+      .populate('tutors', 'name phone')
+      .populate('students', 'name');
+    
+    if (!center) {
+      return res.status(404).json({ message: 'Center not found' });
+    }
+    
+    res.json(center);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 // Report routes

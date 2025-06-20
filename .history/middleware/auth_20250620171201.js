@@ -59,7 +59,7 @@ export const supervisorOnly = (req, res, next) => {
     console.log(req.body);
     return res.status(403).json({ message: 'Access denied. Supervisor only.' });
   }
-  next()
+  ne
 }
 export const supervisorAndAdminOnly = (req, res, next) => {
   if (req.role !== 'supervisor' && req.role !== 'admin') {
