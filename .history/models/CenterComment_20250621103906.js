@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 
 const centerCommentSchema = new mongoose.Schema({
-  center: {
+  : {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Center',
     required: true
@@ -11,7 +11,7 @@ const centerCommentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Supervisor',
     required: true
-  },
+  },center
   rating:{
     type: Number,
     required: true,
