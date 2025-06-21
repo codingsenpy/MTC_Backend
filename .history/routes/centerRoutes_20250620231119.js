@@ -14,7 +14,6 @@ import {
   checkTutorLocation,
   getNearbyTutors
 } from '../controllers/centerController.js';
-import { ca } from 'date-fns/locale';
 
 const router = express.Router();
 
@@ -67,22 +66,6 @@ router.route('/')
   .get(protect, getCenters)
   .post(protect, adminOnly, upload.array('images', 5), centerValidation, validateRequest, createCenter);
 
-router.get('/comments',  async (req, res) => {
-  console.log('enter center comments');
-  try{
-    console.log('Fetching all center comments');
-    const comments = await CenterComment.find()
-      .populate('center', 'name location area')
-      .populate('supervisor', 'name email phone')
-      .select('-__v');
-        console.log('Comments fetched successfully:', comments);
-    res.status(201).json(comments);
-  }catch (error) {
-    console.error('Error fetching center comments:', error);
-    res.status(500).json({ message: error.message });
-  }
-});
-
 router.route('/:id')
   .get(protect, getCenter)
   .put(protect, adminOnly, upload.array('images', 5), centerValidation, validateRequest, updateCenter)
@@ -92,22 +75,7 @@ router.post('/check-location', protect, locationCheckValidation, validateRequest
 
 router.get('/:centerId/nearby-tutors', getNearbyTutors);
 
-// router.get('/:id/comments', auth, adminOnly, async (req, res) => {
-//   try {
-//     const center = await Center.findById(req.params.id);
-//     if (!center) {
-//       return res.status(404).json({ message: 'Center not found' });
-//     }
-
-//     const comments = await CenterComment.find({ center: center._id })
-//       .populate('supervisor', 'name email phone')
-//       .select('-__v');
-//     console.log(comments);
-//     res.status(201).json(comments);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// })
+router.get('/:id/comments', auth, admin')
 
 router.post('/comment/:id', auth, supervisorOnly, async (req, res) => {
   try {

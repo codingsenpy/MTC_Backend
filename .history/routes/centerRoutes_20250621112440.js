@@ -67,7 +67,16 @@ router.route('/')
   .get(protect, getCenters)
   .post(protect, adminOnly, upload.array('images', 5), centerValidation, validateRequest, createCenter);
 
-router.get('/comments',  async (req, res) => {
+router.route('/:id')
+  .get(protect, getCenter)
+  .put(protect, adminOnly, upload.array('images', 5), centerValidation, validateRequest, updateCenter)
+  .delete(protect, adminOnly, deleteCenter);
+
+router.post('/check-location', protect, locationCheckValidation, validateRequest, checkTutorLocation);
+
+router.get('/:centerId/nearby-tutors', getNearbyTutors);
+
+router.get('/comments', auth, adminOnly, async (req, res) => {
   console.log('enter center comments');
   try{
     console.log('Fetching all center comments');
@@ -78,19 +87,9 @@ router.get('/comments',  async (req, res) => {
         console.log('Comments fetched successfully:', comments);
     res.status(201).json(comments);
   }catch (error) {
-    console.error('Error fetching center comments:', error);
     res.status(500).json({ message: error.message });
   }
 });
-
-router.route('/:id')
-  .get(protect, getCenter)
-  .put(protect, adminOnly, upload.array('images', 5), centerValidation, validateRequest, updateCenter)
-  .delete(protect, adminOnly, deleteCenter);
-
-router.post('/check-location', protect, locationCheckValidation, validateRequest, checkTutorLocation);
-
-router.get('/:centerId/nearby-tutors', getNearbyTutors);
 
 // router.get('/:id/comments', auth, adminOnly, async (req, res) => {
 //   try {

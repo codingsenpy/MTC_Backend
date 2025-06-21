@@ -67,22 +67,6 @@ router.route('/')
   .get(protect, getCenters)
   .post(protect, adminOnly, upload.array('images', 5), centerValidation, validateRequest, createCenter);
 
-router.get('/comments',  async (req, res) => {
-  console.log('enter center comments');
-  try{
-    console.log('Fetching all center comments');
-    const comments = await CenterComment.find()
-      .populate('center', 'name location area')
-      .populate('supervisor', 'name email phone')
-      .select('-__v');
-        console.log('Comments fetched successfully:', comments);
-    res.status(201).json(comments);
-  }catch (error) {
-    console.error('Error fetching center comments:', error);
-    res.status(500).json({ message: error.message });
-  }
-});
-
 router.route('/:id')
   .get(protect, getCenter)
   .put(protect, adminOnly, upload.array('images', 5), centerValidation, validateRequest, updateCenter)
@@ -91,6 +75,19 @@ router.route('/:id')
 router.post('/check-location', protect, locationCheckValidation, validateRequest, checkTutorLocation);
 
 router.get('/:centerId/nearby-tutors', getNearbyTutors);
+
+router.get('/comments', auth, adminOnly, async (req, res) => {
+  conse
+  try{
+    const comments = await CenterComment.find()
+      .populate('center', 'name location area')
+      .populate('supervisor', 'name email phone')
+      .select('-__v');
+    res.status(201).json(comments);
+  }catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 // router.get('/:id/comments', auth, adminOnly, async (req, res) => {
 //   try {

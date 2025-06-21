@@ -67,6 +67,15 @@ router.route('/')
   .get(protect, getCenters)
   .post(protect, adminOnly, upload.array('images', 5), centerValidation, validateRequest, createCenter);
 
+router.route('/:id')
+  .get(protect, getCenter)
+  .put(protect, adminOnly, upload.array('images', 5), centerValidation, validateRequest, updateCenter)
+  .delete(protect, adminOnly, deleteCenter);
+
+router.post('/check-location', protect, locationCheckValidation, validateRequest, checkTutorLocation);
+
+router.get('/:centerId/nearby-tutors', getNearbyTutors);
+
 router.get('/comments',  async (req, res) => {
   console.log('enter center comments');
   try{
@@ -83,31 +92,6 @@ router.get('/comments',  async (req, res) => {
   }
 });
 
-router.route('/:id')
-  .get(protect, getCenter)
-  .put(protect, adminOnly, upload.array('images', 5), centerValidation, validateRequest, updateCenter)
-  .delete(protect, adminOnly, deleteCenter);
-
-router.post('/check-location', protect, locationCheckValidation, validateRequest, checkTutorLocation);
-
-router.get('/:centerId/nearby-tutors', getNearbyTutors);
-
-// router.get('/:id/comments', auth, adminOnly, async (req, res) => {
-//   try {
-//     const center = await Center.findById(req.params.id);
-//     if (!center) {
-//       return res.status(404).json({ message: 'Center not found' });
-//     }
-
-//     const comments = await CenterComment.find({ center: center._id })
-//       .populate('supervisor', 'name email phone')
-//       .select('-__v');
-//     console.log(comments);
-//     res.status(201).json(comments);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// })
 
 router.post('/comment/:id', auth, supervisorOnly, async (req, res) => {
   try {
