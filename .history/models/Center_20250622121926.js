@@ -56,9 +56,6 @@ const centerSchema = new mongoose.Schema({
   }
 });
 
-// Ensure uniqueness of the coordinates array
-centerSchema.index({ coordinates: 1 }, { unique: true });
-
 const Center = mongoose.model('Center', centerSchema);
 
 export default Center;

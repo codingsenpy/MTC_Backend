@@ -48,8 +48,7 @@ const studentSchema = new mongoose.Schema({
   aadharNumber: {
     type: String,
     required: [true, 'Please add Aadhar number'],
-    match: [/^[0-9]{4}\s[0-9]{4}\s[0-9]{4}$/, 'Please add a valid Aadhar number'],
-    unique: true
+    match: [/^[0-9]{4}\s[0-9]{4}\s[0-9]{4}$/, 'Please add a valid Aadhar number']
   },
   assignedCenter: {
     type: mongoose.Schema.Types.ObjectId,

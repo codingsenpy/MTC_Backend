@@ -17,7 +17,8 @@ const centerSchema = new mongoose.Schema({
   coordinates: {
     type: [Number],
     required: [true, 'Please add coordinates'],
-    index: '2dsphere'
+    index: '2dsphere',
+    un
   },
   area: {
     type: String,
@@ -55,9 +56,6 @@ const centerSchema = new mongoose.Schema({
     default: Date.now
   }
 });
-
-// Ensure uniqueness of the coordinates array
-centerSchema.index({ coordinates: 1 }, { unique: true });
 
 const Center = mongoose.model('Center', centerSchema);
 

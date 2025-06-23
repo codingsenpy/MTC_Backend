@@ -19,7 +19,7 @@ const adminSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please add a phone number'],
     match: [/^[0-9]{10}$/, 'Please add a valid phone number'],
-    unique: true
+    
   },
   password: {
     type: String,
