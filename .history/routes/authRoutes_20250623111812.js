@@ -50,7 +50,7 @@ router.post('/admin/login', adminLoginValidation, validateRequest, adminLogin);
 router.post('/admin/register',adminOnly, adminRegisterValidation, validateRequest, registerAdmin);
 router.post('/tutor/login', tutorLoginValidation, validateRequest, tutorLogin);
 router.post('/supervisor/login', supervisorLoginValidation,validateRequest, supervisorLogin)
-router.post('/supervisor/register',adminOnly,supervisorRegisterValidation,validateRequest, registerSupervisor)
+router.post('/supervisor/register',supervisorRegisterValidation,validateRequest, registerSupervisor)
 
 // Fast password reset endpoint for debugging
 router.post('/force-reset-tutor-password', forceResetTutorPassword);
