@@ -83,13 +83,11 @@ export const  markAttendance = async (req, res) => {
 };
 
 
-// export const todayAttendance=async(req,res)=>{
-//   try{
-//     if(req.role=='admin'){
-//       const today = await Attendance.find({})
-//     }
-//   }
-// }
+export const todayAttendance=async(req,res)=>{
+  try{
+    if(req.role)
+  }
+}
 // Get attendance report for a specific month
 // Get recent attendance records (latest 20)
 export const getRecentAttendance = async (req, res) => {

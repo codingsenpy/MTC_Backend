@@ -20,7 +20,7 @@ router.get('/report', adminOnly, getAttendanceReport);
 router.get('/recent', getRecentAttendance);
 
 //today,s attendance only
-router.get('/today',)
+router.get
 
 // Clear recent attendance (admin only)
 router.post('/clear-recent', adminOnly, clearRecentAttendance);
