@@ -96,9 +96,9 @@ export const todayAttendance=async(req,res)=>{
           $lte: endOfToday
         },
       }).sort({ createdAt: -1 })
-        .limit(20)
-        .populate('tutor', 'name')
-        .populate('center', 'name');
+      console.log(today)
+      console.log(today[0].tutor)
+      const tutor= await 
       return res.json(today);
     }
     else{
