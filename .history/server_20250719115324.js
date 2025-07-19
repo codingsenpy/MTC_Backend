@@ -23,7 +23,13 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+    origin: [
+        'https://tqfmohallatuitioncenters.in',
+        'https://www.tqfmohallatuitioncenters.in',
+        'https://muhalla-tuition-center.netlify.app', 
+        'http://localhost:5173',
+        'http://localhost:3000'
+    ],
     credentials: true
   }));
 app.use(express.json());

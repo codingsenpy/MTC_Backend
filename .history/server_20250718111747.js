@@ -16,6 +16,14 @@ import announcementRoutes from './routes/announcementRoutes.js';
 // Load env vars
 dotenv.config();
 
+// Debug: Log environment variables
+console.log('=== ENVIRONMENT DEBUG ===');
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('PORT:', process.env.PORT);
+console.log('MONGODB_URI:', process.env.MONGODB_URI);
+console.log('JWT_SECRET:', process.env.JWT_SECRET ? 'SET' : 'NOT SET');
+console.log('========================');
+
 // Connect to database
 connectDB();
 
@@ -23,7 +31,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+    origin: ['https://muhalla-tuition-center.netlify.app', 'http://localhost:5173'],
     credentials: true
   }));
 app.use(express.json());

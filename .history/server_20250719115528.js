@@ -22,8 +22,19 @@ connectDB();
 const app = express();
 
 // Middleware
+// CORS configuration
+const corsOrigins = process.env.CORS_ORIGIN 
+  ? process.env.CORS_ORIGIN.split(',').map(origin => origin.trim())
+  : [
+      'https://tqfmohallatuitioncenters.in',
+      'https://www.tqfmohallatuitioncenterso s.in',
+      'https://muhalla-tuition-center.netlify.app',
+      'http://localhost:5173',
+      'http://localhost:3000'
+    ];
+
 app.use(cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+    origin: corsOrigins,
     credentials: true
   }));
 app.use(express.json());
