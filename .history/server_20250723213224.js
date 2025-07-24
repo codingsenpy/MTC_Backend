@@ -37,7 +37,7 @@ app.use('/api/supervisor',supervisorRoutes);
 app.use('/api/hadiya', hadiyaRoutes); // Added
 app.use('/api/guest', guestRoutes);
 app.use('/api/announcements', announcementRoutes);
-app.use('/api/native',nativeRoutes)
+app.use('/api/native',)
 app.use('/api', apiRoutes);
 
 // Error handler
