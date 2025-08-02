@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 const centerSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Please add a center name']
+    required: [true, 'Please add a center name'],
+    unique: true,
   },
   status: { 
     type: String,
@@ -17,8 +18,7 @@ const centerSchema = new mongoose.Schema({
   coordinates: {
     type: [Number],
     required: [true, 'Please add coordinates'],
-    index: '2dsphere',
-    unique: true
+    index: '2dsphere'
   },
   area: {
     type: String,
@@ -56,6 +56,9 @@ const centerSchema = new mongoose.Schema({
     default: Date.now
   }
 });
+
+// Index coordinates for geospatial queries
+centerSchema.index({ coordinates: 1 });
 
 const Center = mongoose.model('Center', centerSchema);
 
