@@ -102,11 +102,16 @@ export const tutorLogin = async (req, res) => {
     }
     
     if (!isMatch) {
+      console.log('DEBUG: Login failed - Invalid credentials');
       return res.status(401).json({ message: 'Invalid credentials' });
     }
     
+    console.log('DEBUG: Password verification SUCCESSFUL');
+    console.log('------------------------------------------------------------');
+    
     // Generate JWT token
     const token = generateToken(tutor._id, 'tutor');
+    console.log('Login successful, token generated');
 
     // Prepare response with tutor and center data
     const response = {
@@ -172,7 +177,7 @@ export const supervisorLogin = async(req,res)=>{
     });
   }
   catch (error) {
-    console.error('Supervisor login error:', error);
+    console.error('DEBUG: Supervisor login error:', error);
     res.status(500).json({ message: error.message });
 }
 }

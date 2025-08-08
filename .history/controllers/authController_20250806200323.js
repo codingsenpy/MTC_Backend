@@ -172,7 +172,7 @@ export const supervisorLogin = async(req,res)=>{
     });
   }
   catch (error) {
-    console.error('Supervisor login error:', error);
+    console.error('DEBUG: Supervisor login error:', error);
     res.status(500).json({ message: error.message });
 }
 }

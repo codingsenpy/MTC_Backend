@@ -80,34 +80,18 @@ router.put('/:id', auth, adminOnly, createActivityLogger('UPDATE_SUPERVISOR', 'S
   }
 });
 
-// DELETE /api/supervisor/:id - Delete supervisor (admin only)
 router.delete('/:id', auth, adminOnly, async (req, res) => {
   try {
-    const supervisor = await Supervisor.findById(req.params.id);
+    const supervisor = await Supervisor.findByIdAndDelete(req.params.id);
     if (!supervisor) {
       return res.status(404).json({ message: 'Supervisor not found' });
     }
-    
-    // Store supervisor name for activity logging
-    req.deletedItemName = supervisor.name;
-    
-    await Supervisor.findByIdAndDelete(req.params.id);
-    
-    // Log the activity manually since we need the supervisor info before deletion
-    await logAdminActivity(
-      req.user,
-      'DELETE_SUPERVISOR',
-      'Supervisor',
-      req.params.id,
-      supervisor.name,
-      { deletedSupervisor: { name: supervisor.name, email: supervisor.email } },
-      req
-    );
-    
     res.json({ message: 'Supervisor deleted successfully' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
+
+router.post('')
 
 export default router; 

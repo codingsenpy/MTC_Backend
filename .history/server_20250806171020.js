@@ -34,7 +34,6 @@ app.use(morgan('dev'));
 // Mount API routes
 app.use('/api/attendance', attendanceRoutes);
 app.use('/api/admin', adminRoutes);
-app.use('/api/admin/activities', adminActivityRoutes);
 app.use('/api/supervisor',supervisorRoutes);
 app.use('/api/hadiya', hadiyaRoutes); // Added
 app.use('/api/guest', guestRoutes);

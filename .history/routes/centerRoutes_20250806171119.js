@@ -86,8 +86,8 @@ router.get('/comments',  async (req, res) => {
 
 router.route('/:id')
   .get(protect, getCenter)
-  .put(protect, adminOnly, createActivityLogger('UPDATE_CENTER', 'Center'), upload.array('images', 5), centerValidation, validateRequest, updateCenter)
-  .delete(protect, adminOnly, createActivityLogger('DELETE_CENTER', 'Center'), deleteCenter);
+  .put(protect, adminOnly, upload.array('images', 5), centerValidation, validateRequest, updateCenter)
+  .delete(protect, adminOnly, deleteCenter);
 
 router.post('/check-location', protect, locationCheckValidation, validateRequest, checkTutorLocation);
 

@@ -109,12 +109,12 @@ router.use(protect);
 // Routes that require admin access
 router.route('/')
   .get(getTutors)
-  .post(adminOnly, createActivityLogger('CREATE_TUTOR', 'Tutor'), upload.fields(tutorUploadFields), tutorValidation, validateRequest, createTutor);
+  .post(adminOnly, upload.fields(tutorUploadFields), tutorValidation, validateRequest, createTutor);
 
 router.route('/:id')
   .get(getTutor)
-  .put(adminOnly, createActivityLogger('UPDATE_TUTOR', 'Tutor'), upload.fields(tutorUploadFields), updateValidation, validateRequest, updateTutor)
-  .delete(adminOnly, createActivityLogger('DELETE_TUTOR', 'Tutor'), deleteTutor);
+  .put(adminOnly, upload.fields(tutorUploadFields), updateValidation, validateRequest, updateTutor)
+  .delete(adminOnly, deleteTutor);
 
 // Report routes
 router.get('/:id/attendance', getTutorAttendanceReport);
